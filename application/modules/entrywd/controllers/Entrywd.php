@@ -23,13 +23,15 @@ class Entrywd extends CI_Controller
 	{
 		$this->sys->add_javascript_top_custom('assets/plugins/datatables/datatables.min.js');
 		$this->sys->add_css_custom('assets/plugins/datatables/datatables.min.css');
-		$data['condition'] = $this->db->get_where('conditionwd', ['status' => 1])->result();
+		$data['condition'] = $this->db->get_where('condition', ['status' => 1, 'devisi_id' => 1])->result();
+		$data['action'] = $this->db->get_where('action', ['status' => 1, 'devisi_id' => 1])->result();
+		$data['count_action'] = $this->db->get_where('action', ['status' => 1, 'devisi_id' => 1])->num_rows();
 		$this->sys->render_metronic('index', $data);
 	}
 
 	public function fetch()
 	{
-		print_r($this->dt->generate_json('conditionwd'));
+		print_r($this->dt->generate_json('condition'));
 	}
 
 	public function save()
@@ -44,14 +46,14 @@ class Entrywd extends CI_Controller
 	}
 
 	public function delete(){
-		$this->crud->set_table('conditionwd');
+		$this->crud->set_table('condition');
 		$this->crud->where('id');
 		echo $this->crud->crud('delete');
 	}
 
 	public function modal($view)
 	{
-		$data['condition'] = $this->db->where('id', @$_GET['id'])->get('conditionwd')->row();
+		$data['condition'] = $this->db->where('id', @$_GET['id'])->get('condition')->row();
 		$this->sys->render_metronic_modal($view, $data);
 	}
 

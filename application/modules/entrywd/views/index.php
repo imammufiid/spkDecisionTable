@@ -1,34 +1,33 @@
 <!--begin:: Widgets/Download Files-->
 <?php
-			$condition_stub = $this->db->get_where('conditionwd', ['status' => 1])->num_rows();
-			$action_stub = 3;
-			$combinations = pow(2, $condition_stub);
-			$half = $combinations;
+$condition_stub = $this->db->get_where('condition', ['status' => 1, 'devisi_id' => 1])->num_rows();
+$action_stub = 3;
+$combinations = pow(2, $condition_stub);
+$half = $combinations;
+$trueFlag = true;
+$counter = 0;
+$arr = array();
+//main logic
+for ($i = 0; $i < $condition_stub; $i++) {
+	$half = $half / 2;
+	for ($x = 0; $x < $combinations; $x++) {
+		if ($trueFlag) {
+			$arr[$i][$x] = true;
+		} else {
+			$arr[$i][$x] = false;
+		}
+		if ($counter == ($half - 1) && $trueFlag == true) {
+			$trueFlag = false;
+			$counter = 0;
+		} elseif ($counter == ($half - 1) && $trueFlag == false) {
 			$trueFlag = true;
 			$counter = 0;
-			$arr = array();
-			$data_action = ['Diterima Non Biaya', 'Diterima Bagian FrontEnd', 'Masuk program magang', 'Ditolak'];
-			//main logic
-			for ($i = 0; $i < $condition_stub; $i++) {
-				$half = $half / 2;
-				for ($x = 0; $x < $combinations; $x++) {
-					if ($trueFlag) {
-						$arr[$i][$x] = true;
-					} else {
-						$arr[$i][$x] = false;
-					}
-					if ($counter == ($half - 1) && $trueFlag == true) {
-						$trueFlag = false;
-						$counter = 0;
-					} elseif ($counter == ($half - 1) && $trueFlag == false) {
-						$trueFlag = true;
-						$counter = 0;
-					} else {
-						$counter++;
-					}
-				}
-			}
-			?>
+		} else {
+			$counter++;
+		}
+	}
+}
+?>
 <div class="kt-portlet kt-portlet--height-fluid">
 	<div class="kt-portlet__head">
 		<div class="kt-portlet__head-label">
@@ -36,56 +35,55 @@
 				<?php echo $_render_menu_label ?>
 			</h3>
 		</div>
-		<div class="kt-portlet__head-toolbar">
-			<?php echo $this->sys->btn_dt_add('dt_add(this)', 'Tambah') ?>
-		</div>
+			<!-- <div class="kt-portlet__head-toolbar">
+				<?php echo $this->sys->btn_dt_add('dt_add(this)', 'Tambah') ?>
+			</div> -->
 	</div>
 	<div class="kt-portlet__body">
 		<div class="mt-3 table-responsive">
-		<h4>n = condition stub = <?= $condition_stub ?></h4>
-		<h4>rule = 2<sup><?= $condition_stub ?></sup> = <?= $combinations ?></h4>
+			<h4>n = condition stub = <?= $condition_stub ?></h4>
+			<h4>rule = 2<sup><?= $condition_stub ?></sup> = <?= $combinations ?></h4>
 			<!-- write table -->
-			<table  class="table table-bordered table-inverse table-hover">
-		<thead bgcolor="#1E1E2D" style="color: #fff">
-		<?php
-		for($j = 0; $j < 1; $j++){
-			echo "<th class='text-center align-middle'>CONDITION STUB</th>";
-			for($k = 1; $k <= $combinations; $k++){
-				echo "<th class='text-center align-middle'> Rule ". $k ."</th>";
-			}
-		}
-		echo "</thead>";
-		for ($x = 0; $x < $condition_stub; $x++) {
-			// echo "<td>q</td>";
-			echo "<tbody><th>".$condition[$x]->condition."</th>";
-			for ($i = 0; $i < $combinations; $i++) {
-				if ($arr[$x][$i]) {
-						echo "<td class='text-center align-middle'>1</td>";
-					} else {
-						echo "<td class='text-center align-middle'>0</td>";
+			<table class="table table-bordered table-inverse table-hover">
+				<thead bgcolor="#1E1E2D" style="color: #fff">
+					<?php
+					for ($j = 0; $j < 1; $j++) {
+						echo "<th class='text-center align-middle'>CONDITION STUB</th>";
+						for ($k = 1; $k <= $combinations; $k++) {
+							echo "<th class='text-center align-middle'> Rule " . $k . "</th>";
+						}
 					}
-				}
-			}
+					echo "</thead>";
+					for ($x = 0; $x < $condition_stub; $x++) {
+						// echo "<td>q</td>";
+						echo "<tbody><th>" . $condition[$x]->condition . "</th>";
+						for ($i = 0; $i < $combinations; $i++) {
+							if ($arr[$x][$i]) {
+								echo "<td class='text-center align-middle'>1</td>";
+							} else {
+								echo "<td class='text-center align-middle'>0</td>";
+							}
+						}
+					}
 
-			echo "<thead bgcolor='#1E1E2D' style='color: #fff'>";
-		for($j = 0; $j < 1; $j++){
-			echo "<th class='text-center align-middle'>ACTION STUB</th>";
-			for($k = 1; $k <= $combinations; $k++){
-				echo "<th class='text-center align-middle'> Action ". $k ."</th>";
-			}
-		}
-		echo "</thead><tbody>";
-			$counter = count($data_action);
-			for ($x = 0; $x < $counter; $x++) {
-				echo "<tr><th>".$data_action[$x]."</th>";
-				for ($i = 0; $i < $combinations; $i++) {
-							echo "<td class='text-center'><input type='text' class='form-control' name='input[$x$i]' width='10px'></td>";
+					echo "<thead bgcolor='#1E1E2D' style='color: #fff'>";
+					for ($j = 0; $j < 1; $j++) {
+						echo "<th class='text-center align-middle'>ACTION STUB</th>";
+						for ($k = 1; $k <= $combinations; $k++) {
+							echo "<th class='text-center align-middle'> Action " . $k . "</th>";
+						}
 					}
-					echo "</tr>";
-				}
-				echo "</tbody>";
-			echo "</table>";
-			?>
+					echo "</thead><tbody>";
+					for ($x = 0; $x < $count_action; $x++) {
+						echo "<tr><th>" . $action[$x]->action . "</th>";
+						for ($i = 0; $i < $combinations; $i++) {
+							echo "<td class='text-center'><input type='text' class='form-control' name='input[$x$i]' width='10px'></td>";
+						}
+						echo "</tr>";
+					}
+					echo "</tbody>";
+					echo "</table>";
+					?>
 		</div>
 	</div>
 </div>
@@ -151,12 +149,13 @@
 	$(document).ready(function() {
 		// var tabel = $('#tabel-data');
 		var tabel = $('#tabel-data').DataTable();
-			// ajax: {
-			// 	url: "<?php //echo base_url('conditionwd/fetch') ?>",
-			// 	dataSrc: "data",
-			// 	"type": "POST",
-			// 	'dataType': 'json',
-			// },
+		// ajax: {
+		// 	url: "<?php //echo base_url('conditionwd/fetch') 
+								?>",
+		// 	dataSrc: "data",
+		// 	"type": "POST",
+		// 	'dataType': 'json',
+		// },
 		// 	processing: true,
 		// 	serverSide: true,
 		// 	columns: [{
@@ -190,7 +189,7 @@
 
 
 		$('#form-md-manage').submit(function(event) {
-			$.post('<?php echo base_url('conditionwd/save') ?>', $(this).serialize(), function(response, textStatus, xhr) {
+			$.post('<?php echo base_url('condition/save') ?>', $(this).serialize(), function(response, textStatus, xhr) {
 
 				// tabel.reload();
 				if (response.status == true) {
@@ -201,14 +200,14 @@
 					// $('#modal_md').modal('hide');
 				} else {
 					toastr.error(response.msg);
-					
+
 				}
 			}, "json");
 			return false;
 		});
 
 		$('#form-md-delete').submit(function(event) {
-			$.post('<?php echo base_url('conditionwd/delete') ?>', $(this).serialize(), function(response, textStatus, xhr) {
+			$.post('<?php echo base_url('condition/delete') ?>', $(this).serialize(), function(response, textStatus, xhr) {
 				tabel.ajax.reload();
 				if (response.status == true) {
 					toastr.success(response.msg);
@@ -247,5 +246,4 @@
 			$('#modal_delete').modal('show');
 		});
 	}
-
 </script>
