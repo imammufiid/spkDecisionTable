@@ -48,6 +48,7 @@ class Action extends CI_Controller
 	public function modal($view)
 	{
 		$data['action'] = $this->db->where('id', @$_GET['id'])->get('action')->row();
+		$data['del_action'] = $this->db->where('id', @$_GET['id'])->get('v_action')->row();
 		$data['devisi'] = $this->db->get_where('devisi', ['status' => 1])->result();
 		$this->sys->render_metronic_modal($view, $data);
 	}
