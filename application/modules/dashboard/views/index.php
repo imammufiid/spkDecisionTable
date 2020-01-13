@@ -1,7 +1,7 @@
 <?php if ($this->session->userdata('group_id') != 3) : ?>
 	<div class="row">
 		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="<?= base_url('penyakit') ?>">
+			<a href="<?= base_url('devisi') ?>">
 				<div class="kt-portlet">
 					<div class="kt-portlet__body  kt-portlet__body--fit">
 						<!--begin::Total Profit-->
@@ -9,14 +9,14 @@
 							<div class="kt-widget24__details">
 								<div class="kt-widget24__info">
 									<h4 class="kt-widget24__title">
-										<span class="fa fa-bug"></span> <span class="ml-2">Penyakit</span>
+										<span class="fa fa-bug"></span> <span class="ml-2">Devisi</span>
 									</h4>
 									<span class="kt-widget24__desc">
 										Total
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-brand">
-									<?php $peny = $this->db->get('penyakit')->num_rows();
+									<?php $peny = $this->db->get('devisi')->num_rows();
 									echo $peny;
 									$bar_peny = ($peny / 100) * 100;
 									?>
@@ -32,7 +32,7 @@
 			</a>
 		</div>
 		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="<?= base_url('gejala') ?>">
+			<a href="<?= base_url('condition') ?>">
 				<div class="kt-portlet">
 					<div class="kt-portlet__body  kt-portlet__body--fit">
 						<!--begin::Total Profit-->
@@ -40,14 +40,14 @@
 							<div class="kt-widget24__details">
 								<div class="kt-widget24__info">
 									<h4 class="kt-widget24__title">
-										<span class="fa fa-ghost"></span> <span class="ml-2">Gejala</span>
+										<span class="fa fa-ghost"></span> <span class="ml-2">Condition Stub</span>
 									</h4>
 									<span class="kt-widget24__desc">
 										Total
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-warning">
-									<?php $gjl = $this->db->get('gejala')->num_rows();
+									<?php $gjl = $this->db->get('condition')->num_rows();
 									echo $gjl;
 									$bar_gjl = ($gjl / 200) * 100;
 									?>
@@ -63,7 +63,7 @@
 			</a>
 		</div>
 		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="<?= base_url('pengetahuan') ?>">
+			<a href="<?= base_url('action') ?>">
 				<div class="kt-portlet">
 					<div class="kt-portlet__body  kt-portlet__body--fit">
 						<!--begin::Total Profit-->
@@ -71,14 +71,14 @@
 							<div class="kt-widget24__details">
 								<div class="kt-widget24__info">
 									<h4 class="kt-widget24__title">
-										<span class="flaticon2-checking"></span> <span class="ml-2">Basis Pengetahuan</span>
+										<span class="flaticon2-checking"></span> <span class="ml-2">Action Stub</span>
 									</h4>
 									<span class="kt-widget24__desc">
 										Total
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-success">
-									<?php $peng = $this->db->get('basis_pengetahuan')->num_rows();
+									<?php $peng = $this->db->get('action')->num_rows();
 									echo $peng;
 									$bar_peng = ($peng / 500) * 100;
 									?>
@@ -93,8 +93,11 @@
 				</div>
 			</a>
 		</div>
+		<?php 
+		$devisi = $this->db->get('devisi')->result();
+		foreach($devisi as $dvs) : ?>
 		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="<?= base_url('post') ?>">
+			<a href="#">
 				<div class="kt-portlet">
 					<div class="kt-portlet__body  kt-portlet__body--fit">
 						<!--begin::Total Profit-->
@@ -102,14 +105,14 @@
 							<div class="kt-widget24__details">
 								<div class="kt-widget24__info">
 									<h4 class="kt-widget24__title">
-										<span class="flaticon2-list-1"></span> <span class="ml-2">Post Keterangan</span>
+										<span class="flaticon2-list-1"></span> <span class="ml-2">Condition Stub <?= $dvs->nama_devisi ?></span>
 									</h4>
 									<span class="kt-widget24__desc">
 										Total
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-success">
-									<?php $post = $this->db->get('post')->num_rows();
+									<?php $post = $this->db->get_where('condition', ['devisi_id' => $dvs->id])->num_rows();
 									echo $post;
 									$bar_post = ($post / 100) * 100;
 									?>
@@ -124,8 +127,12 @@
 				</div>
 			</a>
 		</div>
+		<?php endforeach; ?>
+		<?php 
+		$devisi = $this->db->get('devisi')->result();
+		foreach($devisi as $dvs) : ?>
 		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="<?= base_url('aktifitas') ?>">
+			<a href="#">
 				<div class="kt-portlet">
 					<div class="kt-portlet__body  kt-portlet__body--fit">
 						<!--begin::Total Profit-->
@@ -133,20 +140,21 @@
 							<div class="kt-widget24__details">
 								<div class="kt-widget24__info">
 									<h4 class="kt-widget24__title">
-										<span class="flaticon2-poll-symbol"></span> <span class="ml-2">Log Aktifitas</span>
+										<span class="flaticon2-list-1"></span> <span class="ml-2">Action Stub <?= $dvs->nama_devisi ?></span>
 									</h4>
 									<span class="kt-widget24__desc">
 										Total
 									</span>
 								</div>
-								<span class="kt-widget24__stats kt-font-primary">
-									<?php $log = $this->db->get('hasil')->num_rows();
-									echo $log;
-									$bar_log = ($log / 1000) * 100; ?>
+								<span class="kt-widget24__stats kt-font-success">
+									<?php $post = $this->db->get_where('action', ['devisi_id' => $dvs->id])->num_rows();
+									echo $post;
+									$bar_post = ($post / 100) * 100;
+									?>
 								</span>
 							</div>
 							<div class="progress progress--sm">
-								<div class="progress-bar kt-bg-primary" role="progressbar" style="width: <?= $bar_log ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar kt-bg-success" role="progressbar" style="width: <?= $bar_post ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>
 						<!--end::Total Profit-->
@@ -154,6 +162,7 @@
 				</div>
 			</a>
 		</div>
+		<?php endforeach; ?>
 		<?php if ($this->session->userdata('user_id') == 1) : ?>
 			<div class="col-md-4 col-lg-4 col-xl-4">
 				<a href="<?= base_url('core/users') ?>">
@@ -189,7 +198,7 @@
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-<div class="row">
+<!-- <div class="row">
 	<div class="col-md-12 col-lg-12 col-xl-12">
 		<div class="kt-portlet kt-portlet--height-fluid">
 			<figure class="highcharts-figure">
@@ -197,7 +206,7 @@
 			</figure>
 		</div>
 	</div>
-</div>
+</div> -->
 <div class="clearfix"></div>
 <script>
 	$(document).ready(function() {
