@@ -45,7 +45,8 @@ class Entrywd extends CI_Controller
 		}
 	}
 
-	public function delete(){
+	public function delete()
+	{
 		$this->crud->set_table('condition');
 		$this->crud->where('id');
 		echo $this->crud->crud('delete');
@@ -57,7 +58,30 @@ class Entrywd extends CI_Controller
 		$this->sys->render_metronic_modal($view, $data);
 	}
 
-	
+	public function submit()
+	{
+		$condition = $this->db->get_where('condition', ['status' => 1])->result();
+		foreach($condition as $val) {
+			$cond[$val->id] = serialize($this->input->post('cond')[$val->id]);
+			$this->db->set('value', $cond[$val->id]);
+			$this->db->where('id', $val->id);
+			$this->db->where('devisi_id', 1);
+			$this->db->update('condition');
+		}
+
+		$action = $this->db->get_where('action', ['status' => 1])->result();
+		foreach($action as $val) {
+			$act[$val->id] = serialize($this->input->post('act')[$val->id]);
+			$this->db->set('value', $act[$val->id]);
+			$this->db->where('id', $val->id);
+			$this->db->where('devisi_id', 1);
+			$this->db->update('action');
+		}
+
+		foreach($action as $val){
+			var_dump(unserialize($val->value)) . "<br>";
+		}
+	}
 }
 
 /* End of file Guru.php */

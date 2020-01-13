@@ -35,7 +35,7 @@ for ($i = 0; $i < $condition_stub; $i++) {
 				<?php echo $_render_menu_label ?>
 			</h3>
 		</div>
-			<!-- <div class="kt-portlet__head-toolbar">
+		<!-- <div class="kt-portlet__head-toolbar">
 				<?php echo $this->sys->btn_dt_add('dt_add(this)', 'Tambah') ?>
 			</div> -->
 	</div>
@@ -44,46 +44,52 @@ for ($i = 0; $i < $condition_stub; $i++) {
 			<h4>n = condition stub = <?= $condition_stub ?></h4>
 			<h4>rule = 2<sup><?= $condition_stub ?></sup> = <?= $combinations ?></h4>
 			<!-- write table -->
-			<table class="table table-bordered table-inverse table-hover">
-				<thead bgcolor="#1E1E2D" style="color: #fff">
-					<?php
-					for ($j = 0; $j < 1; $j++) {
-						echo "<th class='text-center align-middle'>CONDITION STUB</th>";
-						for ($k = 1; $k <= $combinations; $k++) {
-							echo "<th class='text-center align-middle'> Rule " . $k . "</th>";
-						}
-					}
-					echo "</thead>";
-					for ($x = 0; $x < $condition_stub; $x++) {
-						// echo "<td>q</td>";
-						echo "<tbody><th>" . $condition[$x]->condition . "</th>";
-						for ($i = 0; $i < $combinations; $i++) {
-							if ($arr[$x][$i]) {
-								echo "<td class='text-center align-middle'>1</td>";
-							} else {
-								echo "<td class='text-center align-middle'>0</td>";
-							}
-						}
-					}
+			<form action="<?= base_url('entrywd/submit') ?>" method="post">
+			<input type="hidden" value="<?= $combinations ?>" name="combinations">
+				<button class="btn btn-success float-right mb-3">Submit</button>
+				<table class="table table-bordered table-inverse table-hover">
+					<thead bgcolor="#1E1E2D" style="color: #fff">
+						<?php for ($j = 0; $j < 1; $j++) : ?>
+							<th class='text-center align-middle'>CONDITION STUB</th>
+							<?php for ($k = 1; $k <= $combinations; $k++) : ?>
+								<th class='text-center align-middle'> Rule <?= $k ?> </th>
+							<?php endfor ?>
+						<?php endfor; ?>
+					</thead>
+					<?php for ($x = 0; $x < $condition_stub; $x++) : ?>
+						<tbody>
+							<th><?= $condition[$x]->condition ?> </th>
+							<?php for ($i = 0; $i < $combinations; $i++) : ?>
+								<?php if ($arr[$x][$i]) : ?>
+									<td class='text-center align-middle'><input type='text' name='cond[<?= $condition[$x]->id ?>][<?= $i ?>]' class='form-control border-0' value='1' readonly></td>
+								<?php else : ?>
+									<td class='text-center align-middle'><input type='text' name='cond[<?= $condition[$x]->id ?>][<?= $i ?>]' class='form-control border-0' value='0' readonly></td>
+								<?php endif; ?>
+							<?php endfor; ?>
+						<?php endfor; ?>
 
-					echo "<thead bgcolor='#1E1E2D' style='color: #fff'>";
-					for ($j = 0; $j < 1; $j++) {
-						echo "<th class='text-center align-middle'>ACTION STUB</th>";
-						for ($k = 1; $k <= $combinations; $k++) {
-							echo "<th class='text-center align-middle'> Action " . $k . "</th>";
-						}
-					}
-					echo "</thead><tbody>";
-					for ($x = 0; $x < $count_action; $x++) {
-						echo "<tr><th>" . $action[$x]->action . "</th>";
-						for ($i = 0; $i < $combinations; $i++) {
-							echo "<td class='text-center'><input type='text' class='form-control' name='input[$x$i]' width='10px'></td>";
-						}
-						echo "</tr>";
-					}
-					echo "</tbody>";
-					echo "</table>";
-					?>
+						<thead bgcolor='#1E1E2D' style='color: #fff'>
+							<?php for ($j = 0; $j < 1; $j++) : ?>
+								<th class='text-center align-middle'>ACTION STUB</th>
+								<?php for ($k = 1; $k <= $combinations; $k++) : ?>
+									<th class='text-center align-middle'> Action <?= $k ?></th>
+								<?php endfor; ?>
+							<?php endfor; ?>
+						</thead>
+						<tbody>
+							<?php for ($x = 0; $x < $count_action; $x++) : ?>
+								<tr>
+									<th><?= $action[$x]->action ?></th>
+									<?php for ($i = 0; $i < $combinations; $i++) : ?>
+										<td class='text-center'>
+											<input type='text' class='form-control' name='act[<?=$action[$x]->id ?>][<?= $i ?>]' width='10px'>
+										</td>
+									<?php endfor; ?>
+								</tr>
+							<?php endfor; ?>
+							</tbody>
+				</table>
+			</form>
 		</div>
 	</div>
 </div>
