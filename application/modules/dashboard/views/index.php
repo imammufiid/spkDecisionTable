@@ -93,75 +93,75 @@
 				</div>
 			</a>
 		</div>
-		<?php 
+		<?php
 		$devisi = $this->db->get('devisi')->result();
-		foreach($devisi as $dvs) : ?>
-		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="#">
-				<div class="kt-portlet">
-					<div class="kt-portlet__body  kt-portlet__body--fit">
-						<!--begin::Total Profit-->
-						<div class="kt-widget24">
-							<div class="kt-widget24__details">
-								<div class="kt-widget24__info">
-									<h4 class="kt-widget24__title">
-										<span class="flaticon2-list-1"></span> <span class="ml-2">Condition Stub <?= $dvs->nama_devisi ?></span>
-									</h4>
-									<span class="kt-widget24__desc">
-										Total
+		foreach ($devisi as $dvs) : ?>
+			<div class="col-md-4 col-lg-4 col-xl-4">
+				<a href="#">
+					<div class="kt-portlet">
+						<div class="kt-portlet__body  kt-portlet__body--fit">
+							<!--begin::Total Profit-->
+							<div class="kt-widget24">
+								<div class="kt-widget24__details">
+									<div class="kt-widget24__info">
+										<h4 class="kt-widget24__title">
+											<span class="flaticon2-list-1"></span> <span class="ml-2">Condition Stub <?= $dvs->nama_devisi ?></span>
+										</h4>
+										<span class="kt-widget24__desc">
+											Total
+										</span>
+									</div>
+									<span class="kt-widget24__stats kt-font-success">
+										<?php $post = $this->db->get_where('condition', ['devisi_id' => $dvs->id])->num_rows();
+										echo $post;
+										$bar_post = ($post / 100) * 100;
+										?>
 									</span>
 								</div>
-								<span class="kt-widget24__stats kt-font-success">
-									<?php $post = $this->db->get_where('condition', ['devisi_id' => $dvs->id])->num_rows();
-									echo $post;
-									$bar_post = ($post / 100) * 100;
-									?>
-								</span>
+								<div class="progress progress--sm">
+									<div class="progress-bar kt-bg-success" role="progressbar" style="width: <?= $bar_post ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
 							</div>
-							<div class="progress progress--sm">
-								<div class="progress-bar kt-bg-success" role="progressbar" style="width: <?= $bar_post ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
+							<!--end::Total Profit-->
 						</div>
-						<!--end::Total Profit-->
 					</div>
-				</div>
-			</a>
-		</div>
+				</a>
+			</div>
 		<?php endforeach; ?>
-		<?php 
+		<?php
 		$devisi = $this->db->get('devisi')->result();
-		foreach($devisi as $dvs) : ?>
-		<div class="col-md-4 col-lg-4 col-xl-4">
-			<a href="#">
-				<div class="kt-portlet">
-					<div class="kt-portlet__body  kt-portlet__body--fit">
-						<!--begin::Total Profit-->
-						<div class="kt-widget24">
-							<div class="kt-widget24__details">
-								<div class="kt-widget24__info">
-									<h4 class="kt-widget24__title">
-										<span class="flaticon2-list-1"></span> <span class="ml-2">Action Stub <?= $dvs->nama_devisi ?></span>
-									</h4>
-									<span class="kt-widget24__desc">
-										Total
+		foreach ($devisi as $dvs) : ?>
+			<div class="col-md-4 col-lg-4 col-xl-4">
+				<a href="#">
+					<div class="kt-portlet">
+						<div class="kt-portlet__body  kt-portlet__body--fit">
+							<!--begin::Total Profit-->
+							<div class="kt-widget24">
+								<div class="kt-widget24__details">
+									<div class="kt-widget24__info">
+										<h4 class="kt-widget24__title">
+											<span class="flaticon2-list-1"></span> <span class="ml-2">Action Stub <?= $dvs->nama_devisi ?></span>
+										</h4>
+										<span class="kt-widget24__desc">
+											Total
+										</span>
+									</div>
+									<span class="kt-widget24__stats kt-font-success">
+										<?php $post = $this->db->get_where('action', ['devisi_id' => $dvs->id])->num_rows();
+										echo $post;
+										$bar_post = ($post / 100) * 100;
+										?>
 									</span>
 								</div>
-								<span class="kt-widget24__stats kt-font-success">
-									<?php $post = $this->db->get_where('action', ['devisi_id' => $dvs->id])->num_rows();
-									echo $post;
-									$bar_post = ($post / 100) * 100;
-									?>
-								</span>
+								<div class="progress progress--sm">
+									<div class="progress-bar kt-bg-success" role="progressbar" style="width: <?= $bar_post ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
 							</div>
-							<div class="progress progress--sm">
-								<div class="progress-bar kt-bg-success" role="progressbar" style="width: <?= $bar_post ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
+							<!--end::Total Profit-->
 						</div>
-						<!--end::Total Profit-->
 					</div>
-				</div>
-			</a>
-		</div>
+				</a>
+			</div>
 		<?php endforeach; ?>
 		<?php if ($this->session->userdata('user_id') == 1) : ?>
 			<div class="col-md-4 col-lg-4 col-xl-4">
