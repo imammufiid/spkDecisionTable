@@ -2,6 +2,17 @@
   <input type="hidden" value="<?= $condition->id ?>" name="id">
   <div class="col-md-12">
     <div class="form-group">
+      <label>Devisi</label>
+      <select name="devisi_id" id="" class="form-control select-group" style="width: 100%">
+        <option value selected disabled>-- Pilih --</option>
+        <?php foreach ($devisi as $key => $val) : ?>
+          <option value="<?php echo $val->id ?>" <?php if ($condition->devisi_id == $val->id) echo "selected" ?>><?php echo $val->nama_devisi ?></option>
+        <?php endforeach ?>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
       <label>Condition Stub</label>
       <input type="text" name="condition" value="<?= $condition->condition ?>" autocomplete="off" class="form-control">
     </div>

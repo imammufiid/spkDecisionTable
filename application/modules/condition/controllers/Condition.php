@@ -43,7 +43,7 @@ class Condition extends CI_Controller
 	}
 
 	public function delete(){
-		$this->crud->set_table('conditionwd');
+		$this->crud->set_table('condition');
 		$this->crud->where('id');
 		echo $this->crud->crud('delete');
 	}
@@ -51,7 +51,7 @@ class Condition extends CI_Controller
 	public function modal($view)
 	{
 		$data['devisi'] = $this->db->get_where('devisi', ['status' => 1])->result();
-		$data['condition'] = $this->db->where('id', @$_GET['id'])->get('conditionwd')->row();
+		$data['condition'] = $this->db->where('id', @$_GET['id'])->get('condition')->row();
 		$this->sys->render_metronic_modal($view, $data);
 	}
 
