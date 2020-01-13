@@ -52,6 +52,7 @@ class Condition extends CI_Controller
 	{
 		$data['devisi'] = $this->db->get_where('devisi', ['status' => 1])->result();
 		$data['condition'] = $this->db->where('id', @$_GET['id'])->get('condition')->row();
+		$data['del_condition'] = $this->db->where('id', @$_GET['id'])->get('v_condition')->row();
 		$this->sys->render_metronic_modal($view, $data);
 	}
 
