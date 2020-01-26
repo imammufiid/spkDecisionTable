@@ -46,7 +46,7 @@ for ($i = 0; $i < $condition_stub; $i++) {
 			<!-- write table -->
 			<form action="<?= base_url('entrywd/submit') ?>" method="post">
 			<input type="hidden" value="<?= $combinations ?>" name="combinations">
-				<button class="btn btn-success float-right mb-3">Submit</button>
+				<button class="btn btn-success float-right mb-3" id="submit">Submit</button>
 				<table class="table table-bordered table-inverse table-hover">
 					<thead bgcolor="#1E1E2D" style="color: #fff">
 						<?php for ($j = 0; $j < 1; $j++) : ?>
@@ -82,7 +82,7 @@ for ($i = 0; $i < $condition_stub; $i++) {
 									<th><?= $action[$x]->action ?></th>
 									<?php for ($i = 0; $i < $combinations; $i++) : ?>
 										<td class='text-center'>
-											<input type='text' class='form-control' name='act[<?=$action[$x]->id ?>][<?= $i ?>]' width='10px'>
+											<input type='text' class='form-control' id="act[<?=$action[$x]->id ?>][<?= $i ?>]" name='act[<?=$action[$x]->id ?>][<?= $i ?>]' onkeyup="cek()" width='10px'>
 										</td>
 									<?php endfor; ?>
 								</tr>
@@ -192,8 +192,7 @@ for ($i = 0; $i < $condition_stub; $i++) {
 		// 		},
 		// 	],
 		// });
-
-
+		
 		$('#form-md-manage').submit(function(event) {
 			$.post('<?php echo base_url('condition/save') ?>', $(this).serialize(), function(response, textStatus, xhr) {
 
@@ -225,6 +224,7 @@ for ($i = 0; $i < $condition_stub; $i++) {
 			return false;
 		});
 	});
+
 
 	function dt_add(t) {
 		$.get('<?php echo base_url('conditionwd/modal/add') ?>').done(function(data) {
