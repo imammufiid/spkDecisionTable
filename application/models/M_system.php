@@ -7,12 +7,12 @@ class M_system extends CI_Model {
 	private $v_user = '_v_sys_user';
 	private $sidebar = '_sys_sidebar';
 	private $v_sidebar = '_v_sys_sidebar';
-	private $navbar = '_sys_navbar';
-	private $v_navbar = '_v_sys_navbar';
+	// private $navbar = '_sys_navbar';
+	// private $v_navbar = '_v_sys_navbar';
 	private $setting = '_sys_setting';
 	private $group = '_sys_group';
 	private $sidebar_access = '_sys_sidebar_access';
-	private $navbar_access = '_sys_navbar_access';
+	// private $navbar_access = '_sys_navbar_access';
 	private $dt;
 
 	//--------------------- User Model ----------------
@@ -125,7 +125,7 @@ class M_system extends CI_Model {
 
 	function group_set_acces($group_id) {
 		$this->db->where('sidebar_access_group_id', $group_id)->delete($this->sidebar_access);
-		$this->db->where('navbar_access_group_id', $group_id)->delete($this->navbar_access);
+		// $this->db->where('navbar_access_group_id', $group_id)->delete($this->navbar_access);
 		foreach ($_POST['sidebar_access_sidebar_id'] as $key => $var) {
 			$sidebar['sidebar_access_group_id'] = $group_id;
 			$sidebar['sidebar_access_sidebar_id'] = $var;
@@ -135,17 +135,17 @@ class M_system extends CI_Model {
 			$sidebar['sidebar_access_delete']	= (!empty(@$_POST['sidebar_access_delete'][$var])) ? '1' : '0';
 			$this->db->set($sidebar)->insert($this->sidebar_access);
 		}
-		if (sizeof(@$_POST['navbar_access_navbar_id']) > 0) {
-			foreach ($_POST['navbar_access_navbar_id'] as $key => $var) {
-				$navbar['navbar_access_group_id'] = $group_id;
-				$navbar['navbar_access_navbar_id'] = $var;
-				$navbar['navbar_access_read'] 	= (!empty(@$_POST['navbar_access_read'][$var])) ? '1' : '0';
-				$navbar['navbar_access_create'] 	= (!empty(@$_POST['navbar_access_create'][$var])) ? '1' : '0';
-				$navbar['navbar_access_update'] 	= (!empty(@$_POST['navbar_access_update'][$var])) ? '1' : '0';
-				$navbar['navbar_access_delete']	= (!empty(@$_POST['navbar_access_delete'][$var])) ? '1' : '0';
-				$this->db->set($navbar)->insert($this->navbar_access);
-			}
-		}
+		// if (sizeof(@$_POST['navbar_access_navbar_id']) > 0) {
+		// 	foreach ($_POST['navbar_access_navbar_id'] as $key => $var) {
+		// 		$navbar['navbar_access_group_id'] = $group_id;
+		// 		$navbar['navbar_access_navbar_id'] = $var;
+		// 		$navbar['navbar_access_read'] 	= (!empty(@$_POST['navbar_access_read'][$var])) ? '1' : '0';
+		// 		$navbar['navbar_access_create'] 	= (!empty(@$_POST['navbar_access_create'][$var])) ? '1' : '0';
+		// 		$navbar['navbar_access_update'] 	= (!empty(@$_POST['navbar_access_update'][$var])) ? '1' : '0';
+		// 		$navbar['navbar_access_delete']	= (!empty(@$_POST['navbar_access_delete'][$var])) ? '1' : '0';
+		// 		$this->db->set($navbar)->insert($this->navbar_access);
+		// 	}
+		// }
 		return $this->db->affected_rows();
 	}
 
@@ -188,35 +188,35 @@ class M_system extends CI_Model {
 
 	//--------------------- Navbar Model ---------------------
 
-	function navbar_get($navbar_id = 0) {
-		if (!empty($navbar_id)) {
-			$this->db->where('navbar_id', $navbar_id);
-			return $this->db->get($this->navbar)->row();
-		} else {
-			return $this->db->get($this->v_navbar)->result_array();
-		}
-	}
+	// function navbar_get($navbar_id = 0) {
+	// 	if (!empty($navbar_id)) {
+	// 		$this->db->where('navbar_id', $navbar_id);
+	// 		return $this->db->get($this->navbar)->row();
+	// 	} else {
+	// 		return $this->db->get($this->v_navbar)->result_array();
+	// 	}
+	// }
 
-	function navbar_save() {
-		$response = array('status' => true, 'msg' => 'semua tersimpan!');
-		$this->db->set($_POST);
-		if (!empty(@$_POST['navbar_id'])) {
-			$this->db->where('navbar_id', $_POST['navbar_id']);
-			$this->db->update($this->navbar);
-			if (!$this->db->affected_rows()) {
-				$response = array('status' => false, 'msg' => 'gagal menyimpan!');
-			}
-		} else {
-			$this->db->insert($this->navbar);
-		}
-		return $response;
-	}
+	// function navbar_save() {
+	// 	$response = array('status' => true, 'msg' => 'semua tersimpan!');
+	// 	$this->db->set($_POST);
+	// 	if (!empty(@$_POST['navbar_id'])) {
+	// 		$this->db->where('navbar_id', $_POST['navbar_id']);
+	// 		$this->db->update($this->navbar);
+	// 		if (!$this->db->affected_rows()) {
+	// 			$response = array('status' => false, 'msg' => 'gagal menyimpan!');
+	// 		}
+	// 	} else {
+	// 		$this->db->insert($this->navbar);
+	// 	}
+	// 	return $response;
+	// }
 
-	function navbar_delete($navbar_id='') {
-		$this->db->where('navbar_id', $navbar_id);
-		$this->db->delete($this->navbar);
-		return $this->db->affected_rows();
-	}
+	// function navbar_delete($navbar_id='') {
+	// 	$this->db->where('navbar_id', $navbar_id);
+	// 	$this->db->delete($this->navbar);
+	// 	return $this->db->affected_rows();
+	// }
 
 	//--------------------- Settings Model -------------------
 

@@ -18,18 +18,18 @@
 			<div class="clearfix"></div>
 			<div class="tab mt-4">
 				<ul class="nav nav-tabs  nav-tabs-line" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#kt_tabs_sidebar" role="tab"><i class="fa fa-align-left"></i> Sidebar</a>
-                    </li>
-                    <?php if (sizeof($navbars) > 0): ?>
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#kt_tabs_sidebar" role="tab"><i class="fa fa-align-left"></i> Sidebar</a>
+					</li>
+					<!-- <?php if (sizeof($navbars) > 0) : ?>
 	                    <li class="nav-item">
 	                        <a class="nav-link" data-toggle="tab" href="#kt_tabs_navbar" role="tab"><i class="fa fa-bars"></i> Navbar</a>
 	                    </li>
-                    <?php endif ?>
-                </ul>                        
-                <div class="tab-content">
-                    <div class="tab-pane active" id="kt_tabs_sidebar" role="tabpanel">                   
-						<?php foreach ($sidebars as $key => $var): ?>
+                    <?php endif ?> -->
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="kt_tabs_sidebar" role="tabpanel">
+						<?php foreach ($sidebars as $key => $var) : ?>
 							<?php $groups_access = $this->db->where('sidebar_access_group_id', $groups->group_id)->where('sidebar_access_sidebar_id', $var['sidebar_id'])->get('_sys_sidebar_access')->row() ?>
 							<div class="row mt-3">
 								<div class="col-sm-4 col-md-4 col-lg-4">
@@ -54,10 +54,10 @@
 								</div>
 							</div>
 						<?php endforeach ?>
-                    </div>
-                    <?php if (sizeof($navbars) > 0): ?>
-	                    <div class="tab-pane" id="kt_tabs_navbar" role="tabpanel">
-							<?php foreach ($navbars as $key => $var): ?>
+					</div>
+					<!-- <?php if (sizeof($navbars) > 0) : ?>
+						<div class="tab-pane" id="kt_tabs_navbar" role="tabpanel">
+							<?php foreach ($navbars as $key => $var) : ?>
 								<?php $groups_access = $this->db->where('navbar_access_group_id', $groups->group_id)->where('navbar_access_navbar_id', $var['navbar_id'])->get('_sys_navbar_access')->row() ?>
 								<div class="row mt-3">
 									<div class="col-sm-4 col-md-4 col-lg-4">
@@ -82,9 +82,9 @@
 									</div>
 								</div>
 							<?php endforeach ?>
-	                    </div>
-                    <?php endif ?>
-                 </div>
+						</div>
+					<?php endif ?> -->
+				</div>
 			</div>
 			<hr>
 			<div class="row mt-3">
@@ -101,21 +101,21 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		toastr.options = {
-		  "closeButton": true,
-		  "debug": false,
-		  "newestOnTop": false,
-		  "progressBar": false,
-		  "positionClass": "toast-top-right",
-		  "preventDuplicates": false,
-		  "onclick": null,
-		  "showDuration": "300",
-		  "hideDuration": "1000",
-		  "timeOut": "5000",
-		  "extendedTimeOut": "1000",
-		  "showEasing": "swing",
-		  "hideEasing": "linear",
-		  "showMethod": "fadeIn",
-		  "hideMethod": "fadeOut"
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
 		};
 	});
 </script>

@@ -82,7 +82,7 @@ class Core extends CI_Controller {
 	}
 
 	public function groups_add() {
-		$data['navbars'] = $this->m->navbar_get();
+		// $data['navbars'] = $this->m->navbar_get();
 		$data['sidebars'] = $this->m->sidebar_get();
 		$data['_page_title'] = "Tambah Grup";
 		$this->sys->render_metronic('groups/add', $data);
@@ -90,7 +90,7 @@ class Core extends CI_Controller {
 
 	public function groups_edit() {
 		$group_id = $_GET['id'];
-		$data['navbars'] = $this->m->navbar_get();
+		// $data['navbars'] = $this->m->navbar_get();
 		$data['sidebars'] = $this->m->sidebar_get();
 		$data['groups'] = $this->m->group_get($group_id);
 		$this->sys->render_metronic('groups/edit', $data);
@@ -150,35 +150,35 @@ class Core extends CI_Controller {
 
 	// ------------ Utils navbars page ----------------
 
-public function navbars() {
-		$this->sys->add_javascript_top_custom('assets/plugins/datatables/datatables.min.js');
-		$this->sys->add_css_custom('assets/plugins/datatables/datatables.min.css');
-		$this->sys->render_metronic('navbars/index');
-	}
+// public function navbars() {
+// 		$this->sys->add_javascript_top_custom('assets/plugins/datatables/datatables.min.js');
+// 		$this->sys->add_css_custom('assets/plugins/datatables/datatables.min.css');
+// 		$this->sys->render_metronic('navbars/index');
+// 	}
 
-	public function navbars_modal($html) {
-		$data['navbars'] = $this->m->navbar_get();
-		$this->sys->render_metronic_modal('navbars/'.$html, $data);
-	}
+// 	public function navbars_modal($html) {
+// 		$data['navbars'] = $this->m->navbar_get();
+// 		$this->sys->render_metronic_modal('navbars/'.$html, $data);
+// 	}
 
-	public function navbars_fetch() {
-		echo $this->dt->generate_json('_v_sys_navbar');
-	}
+// 	public function navbars_fetch() {
+// 		echo $this->dt->generate_json('_v_sys_navbar');
+// 	}
 
-	public function navbars_save() {
-		$navbars_save = $this->m->navbar_save();
-		print_r(json_encode($navbars_save));
-	}
+// 	public function navbars_save() {
+// 		$navbars_save = $this->m->navbar_save();
+// 		print_r(json_encode($navbars_save));
+// 	}
 
-	public function navbars_delete() {
-		$navbar_id = $_POST['navbar_id'];
-		$response = $this->m->navbar_delete($navbar_id);
-		if ($response) {
-			print_r(json_encode(array('status' => true, 'msg' => 'berhasil dihapus!')));
-		} else {
-			print_r(json_encode(array('status' => false, 'msg' => 'gagal dihapus!')));
-		}
-	}
+// 	public function navbars_delete() {
+// 		$navbar_id = $_POST['navbar_id'];
+// 		$response = $this->m->navbar_delete($navbar_id);
+// 		if ($response) {
+// 			print_r(json_encode(array('status' => true, 'msg' => 'berhasil dihapus!')));
+// 		} else {
+// 			print_r(json_encode(array('status' => false, 'msg' => 'gagal dihapus!')));
+// 		}
+// 	}
 
 	// ------------ Utils settings page ----------------
 
